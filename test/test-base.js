@@ -1,33 +1,32 @@
 /* global describe, it, afterEach */
 
 const path = require('path');
-const watch = require('..');
 const touch = require('./util/touch');
-require('should');
+const watch = require('..');
 
 function fixtures(glob) {
 	return path.join(__dirname, 'fixtures', glob);
 }
 
-describe('base', function () {
+describe('base', () => {
 	let w;
 
-	afterEach(function (done) {
+	afterEach((done) => {
 		w.on('end', done);
 		w.close();
 	});
 
-	it('should be determined by glob', function (done) {
-		w = watch(fixtures('**/*.js'), function (file) {
+	it('should be determined by glob', (done) => {
+		w = watch(fixtures('**/*.js'), (file) => {
 			file.relative.should.eql(path.normalize('folder/index.js'));
 			file.base.should.eql(fixtures(''));
 			done();
 		}).on('ready', touch(fixtures('folder/index.js')));
 	});
 
-	it('should be overridden by option', function (done) {
+	it('should be overridden by option', (done) => {
 		const explicitBase = fixtures('folder');
-		w = watch(fixtures('**/*.js'), { base: explicitBase }, function (file) {
+		w = watch(fixtures('**/*.js'), {base: explicitBase}, (file) => {
 			file.relative.should.eql('index.js');
 			file.base.should.eql(explicitBase);
 			done();

@@ -42,21 +42,20 @@ module.exports = {
 				printWidth: 80,
 				tabWidth: 4,
 				singleQuote: true,
-				trailingComma: 'all',
-				jsxBracketSameLine: true,
+				trailingComma: 'none',
+				jsxBracketSameLine: false,
 				semi: true,
 				arrowParens: "always",
-				bracketSpacing: true,
-				// endOfLine:"auto",
+				bracketSpacing: false,
 			},
 		],
 		// https://eslint.org/docs/6.0.0/rules/space-before-function-paren
 		"space-before-function-paren": [1, {
-			"anonymous": "always",
-			"named": "always",
-			"asyncArrow": "always"
+			"anonymous": "never",
+			"named": "never",
+			"asyncArrow": "never"
 		}],
-		'object-curly-spacing': [1,'always'],
+		'object-curly-spacing': [1,'never'],
 		'no-var': 'error',
 		'no-const-assign': 'error',
 		radix: 'error',
@@ -67,7 +66,7 @@ module.exports = {
 		semi: ['error', 'always'],
 		'default-case': 'error',
 		'template-curly-spacing': ['error', 'never'], // Prettier.
-		'arrow-parens': 0, // Does not work with Flow generic types
+		'arrow-parens': ["error", "always"], // Does not work with Flow generic types
 		'consistent-return': 0, // Flow.
 		// Prefer new line before return
 		// http://eslint.org/docs/rules/newline-before-return

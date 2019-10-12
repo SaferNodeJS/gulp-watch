@@ -3,32 +3,31 @@
 const path = require('path');
 const fs = require('fs');
 const rimraf = require('rimraf');
-const watch = require('..');
 const touch = require('./util/touch');
-require('should');
+const watch = require('..');
 
 function fixtures(glob) {
 	return path.join(__dirname, 'fixtures', glob);
 }
 
-describe('dir', function () {
+describe('dir', () => {
 	let w;
 
-	afterEach(function (done) {
-		w.on('end', function () {
+	afterEach((done) => {
+		w.on('end', () => {
 			rimraf.sync(fixtures('newDir'));
 			done();
 		});
 		w.close();
 	});
 
-	it('should watch files inside directory', function (done) {
+	it('should watch files inside directory', (done) => {
 		fs.mkdirSync(fixtures('newDir'));
 		touch(fixtures('newDir/index.js'))();
-		w = watch(fixtures('newDir'), function (file) {
+		w = watch(fixtures('newDir'), (file) => {
 			file.relative.should.eql(path.normalize('newDir/index.js'));
 			done();
-		}).on('ready', function () {
+		}).on('ready', () => {
 			touch(fixtures('newDir/index.js'))('new content');
 		});
 	});
