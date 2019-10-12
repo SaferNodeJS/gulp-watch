@@ -1,14 +1,15 @@
 const fs = require('fs');
 
-const touch = function(path, content, cb) {
+const touch = (path, content, cb) => {
 	if (typeof content === 'function') {
 		cb = content;
 		content = undefined;
 	}
 
-	cb = cb || function() {};
+	const nullFunc = () => {};
+	cb = cb || nullFunc;
 
-	return function() {
+	return () => {
 		fs.writeFileSync(path, content || 'wadap');
 		cb();
 	};
