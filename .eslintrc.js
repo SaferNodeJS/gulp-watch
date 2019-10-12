@@ -34,7 +34,7 @@ module.exports = {
 		},
 	},
 	rules: {
-		'compat/compat': 1,
+		'compat/compat': 'error',
 		'prettier/prettier': [
 			'error',
 			{
@@ -42,26 +42,36 @@ module.exports = {
 				printWidth: 80,
 				tabWidth: 4,
 				singleQuote: true,
-				trailingComma: 'es5',
-				jsxBracketSameLine: false,
-				semi: false,
+				trailingComma: 'all',
+				jsxBracketSameLine: true,
+				semi: true,
+				arrowParens: "always",
+				bracketSpacing: true,
+				// endOfLine:"auto",
 			},
 		],
-		'no-var': 2,
+		// https://eslint.org/docs/6.0.0/rules/space-before-function-paren
+		"space-before-function-paren": [1, {
+			"anonymous": "always",
+			"named": "always",
+			"asyncArrow": "always"
+		}],
+		'object-curly-spacing': [1,'always'],
+		'no-var': 'error',
 		'no-const-assign': 'error',
 		radix: 'error',
 		'prefer-template': 'error',
 		'prefer-const': 'error',
 		'prefer-spread': 'error',
 		eqeqeq: ['error', 'always'],
-		semi: [2, 'always'],
-		'default-case': 2,
-		'template-curly-spacing': 0, // Prettier.
+		semi: ['error', 'always'],
+		'default-case': 'error',
+		'template-curly-spacing': ['error', 'never'], // Prettier.
 		'arrow-parens': 0, // Does not work with Flow generic types
 		'consistent-return': 0, // Flow.
 		// Prefer new line before return
 		// http://eslint.org/docs/rules/newline-before-return
-		'newline-before-return': 'error',
+		'newline-before-return': 1,
 		'no-use-before-define': [
 			'error',
 			{ functions: false, classes: false, variables: true },
